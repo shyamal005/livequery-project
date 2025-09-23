@@ -1,4 +1,3 @@
-// services/broadcaster/index.js
 require('dotenv').config();
 const express = require('express');
 const http = require('http');
@@ -8,28 +7,34 @@ const { createClient } = require('redis');
 const app = express();
 const server = http.createServer(app);
 
-// Setup Socket.IO with CORS
+// --- FIX IS HERE ---
+// Setup Socket.IO with CORS to allow all origins
 const io = new Server(server, {
   cors: {
-    origin: "*", // Allow all origins for simplicity
+    origin: "*", // This allows connections from any domain
     methods: ["GET", "POST"]
   }
 });
+// --------------------
 
-// Create a separate Redis client for subscribing
 const redisSubscriber = createClient({
   url: process.env.REDIS_URL || 'redis://localhost:6379'
 });
 
-(async () => {
-  await redisSubscriber.connect();
+redisSubscriber.on('error', (err) => console.log('❌ Redis Subscriber Error', err));
 
-  // Subscribe to the 'logs' channel
-  await redisSubscriber.subscribe('logs', (message) => {
-    console.log('Received log from Redis:', message);
-    // Broadcast the new log to all connected clients
-    io.emit('new_log', JSON.parse(message));
-  });
+(async () => {
+  try {
+    await redisSubscriber.connect();
+    console.log('✅ Redis subscriber connected');
+
+    await redisSubscriber.subscribe('logs', (message) => {
+      console.log('Received log from Redis:', message);
+      io.emit('new_log', JSON.parse(message));
+    });
+  } catch (err) {
+      console.error('🔴 Failed to connect to Redis or subscribe:', err);
+  }
 })();
 
 io.on('connection', (socket) => {
@@ -43,3 +48,4 @@ const PORT = process.env.PORT || 3002;
 server.listen(PORT, () => {
   console.log(`Broadcaster service listening on port ${PORT}`);
 });
+
