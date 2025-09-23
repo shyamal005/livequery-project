@@ -1,0 +1,59 @@
+/* frontend/src/App.css */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+}
+
+.app {
+  text-align: center;
+}
+
+.app-header {
+  background-color: #282c34;
+  padding: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.filter-input {
+  width: 80%;
+  max-width: 600px;
+  padding: 10px;
+  margin-top: 15px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: none;
+  background-color: #3c4049;
+  color: white;
+}
+
+.log-container {
+  padding: 20px;
+  font-family: 'Courier New', Courier, monospace;
+  text-align: left;
+}
+
+.log-entry {
+  padding: 8px;
+  border-bottom: 1px solid #333;
+  display: flex;
+  gap: 20px;
+  white-space: pre-wrap; /* Allows long messages to wrap */
+}
+
+.log-time { color: #888; }
+.log-source { color: #61dafb; font-weight: bold; }
+.log-message { flex: 1; }
+
+/* Color coding for log levels */
+.log-error { background-color: #4d2a2a; }
+.log-warn { background-color: #4d4d2a; }
+.log-info { /* Default */ }
