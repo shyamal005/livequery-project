@@ -1,4 +1,4 @@
-// services/ingestor/index.js
+ // services/ingestor/index.js
 
 require('dotenv').config();
 
