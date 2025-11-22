@@ -12,12 +12,25 @@ function App() {
   const [logs, setLogs] = useState([]);
   const [filter, setFilter] = useState('');
 
-  useEffect(() => {
-    // Listen for new logs from the server
+ useEffect(() => {
+    // Listen for live logs (Keep this)
     socket.on('new_log', (newLog) => {
-      // Add new log to the top of the list, keeping only the latest 200
       setLogs(prevLogs => [newLog, ...prevLogs.slice(0, 199)]);
     });
+
+    // --- NEW CODE STARTS HERE ---
+    // Listen for history when we first load
+    socket.on('log_history', (historyLogs) => {
+      // Replace current logs with history
+      setLogs(historyLogs); 
+    });
+    // --- NEW CODE ENDS HERE ---
+
+    return () => {
+      socket.off('new_log');
+      socket.off('log_history'); // Cleanup
+    };
+  }, []);
 
     // Cleanup on component unmount
     return () => {
