@@ -1,0 +1,10 @@
+{
+  "name": "traffic-bot",
+  "version": "1.0.0",
+  "description": "Generates fake traffic for LiveQuery",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "dependencies": {}
+}
