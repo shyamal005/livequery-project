@@ -15,11 +15,29 @@ const redisClient = createClient({
 redisClient.on('error', (err) => console.log('Redis Client Error', err));
 redisClient.connect();
 
-// The endpoint to receive logs
 app.post('/log', async (req, res) => {
   const logData = req.body;
-  // Add a timestamp to each log
   logData.timestamp = new Date().toISOString();
+
+  try {
+    const message = JSON.stringify(logData);
+
+    // 1. Broadcast it live (Keep this)
+    await redisClient.publish('logs', message);
+
+    // --- NEW CODE STARTS HERE ---
+    // 2. Save it to a list called 'log_history'
+    await redisClient.lPush('log_history', message);
+    
+    // 3. Keep only the last 50 logs (delete older ones) so Redis doesn't fill up
+    await redisClient.lTrim('log_history', 0, 49); 
+    // --- NEW CODE ENDS HERE ---
+
+    res.status(200).send('Log received');
+  } catch (err) {
+    // ... error handling
+  }
+});
 
   try {
     // Publish the log to a Redis channel named 'logs'
