@@ -8,9 +8,7 @@ import './App.css';
 
 
 
-// Connect to the broadcaster service
 
-// Use environment variable for deployed URL, fallback to localhost for development
 
 const WEBSOCKET_URL = process.env.REACT_APP_WEBSOCKET_URL || 'http://localhost:3002';
 
@@ -28,11 +26,11 @@ function App() {
 
   useEffect(() => {
 
-    // Listen for new logs from the server
+  
 
     socket.on('new_log', (newLog) => {
 
-      // Add new log to the top of the list, keeping only the latest 200
+      
 
       setLogs(prevLogs => [newLog, ...prevLogs.slice(0, 199)]);
 
@@ -40,7 +38,7 @@ function App() {
 
 
 
-    // Cleanup on component unmount
+   
 
     return () => {
 
