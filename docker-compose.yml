@@ -2,13 +2,13 @@
 version: '3.8'
 
 services:
-  # Redis message broker
+ 
   redis:
     image: 'redis:alpine'
     ports:
       - '6379:6379'
 
-  # Log Ingestor API
+
   ingestor:
     build: ./services/ingestor
     ports:
@@ -18,7 +18,7 @@ services:
     depends_on:
       - redis
 
-  # WebSocket Broadcaster
+  
   broadcaster:
     build: ./services/broadcaster
     ports:
@@ -28,8 +28,8 @@ services:
     depends_on:
       - redis
 
-  # Frontend UI
+  
   frontend:
     build: ./frontend
     ports:
-      - '80:80' # Changed to port 80 for standard web traffic
+      - '80:80' 
