@@ -46,14 +46,14 @@ body {
   border-bottom: 1px solid #333;
   display: flex;
   gap: 20px;
-  white-space: pre-wrap; /* Allows long messages to wrap */
+  white-space: pre-wrap; 
 }
 
 .log-time { color: #888; }
 .log-source { color: #61dafb; font-weight: bold; }
 .log-message { flex: 1; }
 
-/* Color coding for log levels */
+
 .log-error { background-color: #4d2a2a; }
 .log-warn { background-color: #4d4d2a; }
 .log-info { /* Default */ }
