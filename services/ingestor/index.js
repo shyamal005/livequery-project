@@ -18,7 +18,7 @@ app.use(express.json());
 
 
 
-// Connect to Redis
+
 
 const redisClient = createClient({
 
@@ -32,13 +32,13 @@ redisClient.connect();
 
 
 
-// The endpoint to receive logs
+
 
 app.post('/log', async (req, res) => {
 
   const logData = req.body;
 
-  // Add a timestamp to each log
+  
 
   logData.timestamp = new Date().toISOString();
 
@@ -46,7 +46,7 @@ app.post('/log', async (req, res) => {
 
   try {
 
-    // Publish the log to a Redis channel named 'logs'
+    
 
     await redisClient.publish('logs', JSON.stringify(logData));
 
