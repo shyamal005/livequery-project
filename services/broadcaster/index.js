@@ -16,15 +16,13 @@ const server = http.createServer(app);
 
 
 
-// --- FIX IS HERE ---
 
-// Setup Socket.IO with CORS to allow all origins
 
 const io = new Server(server, {
 
   cors: {
 
-    origin: "*", // This allows connections from any domain
+    origin: "*", 
 
     methods: ["GET", "POST"]
 
@@ -32,7 +30,7 @@ const io = new Server(server, {
 
 });
 
-// --------------------
+
 
 
 
@@ -44,7 +42,7 @@ const redisSubscriber = createClient({
 
 
 
-redisSubscriber.on('error', (err) => console.log('❌ Redis Subscriber Error', err));
+redisSubscriber.on('error', (err) => console.log('Redis Subscriber Error', err));
 
 
 
@@ -54,7 +52,7 @@ redisSubscriber.on('error', (err) => console.log('❌ Redis Subscriber Error', e
 
     await redisSubscriber.connect();
 
-    console.log('✅ Redis subscriber connected');
+    console.log('Redis subscriber connected');
 
 
 
@@ -68,7 +66,7 @@ redisSubscriber.on('error', (err) => console.log('❌ Redis Subscriber Error', e
 
   } catch (err) {
 
-      console.error('🔴 Failed to connect to Redis or subscribe:', err);
+      console.error('Failed to connect to Redis or subscribe:', err);
 
   }
 
