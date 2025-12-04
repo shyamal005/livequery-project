@@ -203,17 +203,7 @@ You will now see logs flowing on the dashboard.
 
 This mirrors real-world production microservice deployments.
 
----
 
-## 📸 Demo (Optional)
-
-Add your screenshots or GIFs here:
-
-```markdown
-![Live Dashboard](/assets/demo.png)
-```
-
----
 
 ## 🤝 Contributing
 
@@ -224,7 +214,6 @@ Pull requests and feature suggestions are welcome!
 ## 📜 License
 
 MIT License © 2025
-
 ---
 
 <p align="center"><b>Made with ❤️ & WebSockets</b></p>
